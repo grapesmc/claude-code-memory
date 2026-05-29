@@ -13,27 +13,32 @@ OpenClaw is Rob's self-hosted AI agent platform running on pve1 (OpenClaw-001, I
 
 **How to apply:** When touching OpenClaw config or upgrading, use this as reference.
 
-## Current state (as of 2026-05-24)
-- Version: 2026.5.22 (updated from 2026.5.12)
+## Current state (as of 2026-05-29)
+- Version: 2026.5.27 (updated from 2026.5.22 on 2026-05-29)
 - Config: `/home/grapesmc/.openclaw/openclaw.json`
 - Primary model: `anthropic/claude-sonnet-4-6` (changed 2026-05-26, was Haiku)
 - Fallback model: `anthropic/claude-haiku-4-5-20251001`
 - Web search provider: `gemini` (kept intentionally — no browser-as-search option in OpenClaw)
 - Auth: `anthropic:claude-personal` (type: token, sk-ant-oat01 OAuth token — same as Claude Code)
-- Gateway: local mode, port 18789, auth token in identity/device-auth.json
+- Gateway: LAN mode (`bind: lan`), port 18789, accessible at `http://192.168.5.64:18789`
+- Service: `systemctl --user restart openclaw-gateway` (user-level, enabled on boot)
 - Workspace: `/home/grapesmc/.openclaw/workspace/`
+- State dir: `/home/grapesmc/.openclaw/` (chmod 700)
 
-## c4monitor (Amesbury Dashboard)
-- Location: `/home/grapesmc/.openclaw/workspace/c4monitor/`
-- Service: `systemctl --user restart c4monitor`
-- Port: 8766
-- Chat endpoint was rewritten (2026-05-12): now POSTs directly to OpenClaw gateway at `http://127.0.0.1:18789/v1/chat/completions` with model `openclaw` instead of spawning a subprocess. Also fixed history bug (history was built but not passed to model before).
-- Gateway token for c4monitor stored in `OPENCLAW_GATEWAY_TOKEN` env var in c4monitor `.env`
+## Security (hardened 2026-05-29)
+- `allowInsecureAuth: false`
+- Auth rate limiting: 10 attempts / 60s window, 5 min lockout
+- State dir permissions: 700
+- Security audit: 0 critical, 1 warn (Haiku fallback — acceptable)
 
-## Planned migration (2026-05-25)
-- OpenClaw-001 VM moving to production server — networking unchanged (192.168.5.64, all ports the same)
-- Nothing in c4monitor or Cloudflare Tunnel config needs to change
-- After migration: confirm `loginctl enable-linger grapesmc` is set so user services start on boot
+## Access
+- Control UI: `http://192.168.5.64:18789` from LAN
+- Auth token in: `/home/grapesmc/.openclaw/identity/device-auth.json`
+
+## Memory sync (set up 2026-05-29)
+- OpenClaw `MEMORY.md` → Claude Code: auto-synced via `memory-watcher.service` (inotifywait)
+- Claude Code → OpenClaw: done manually when writing significant memory updates
+- Claude Code memory backed up to GitHub: `github.com/grapesmc/claude-code-memory` (auto-push on write)
 
 ## Work bot
 OpenClaw was removed from the work bot — too much maintenance overhead. Only running on OpenClaw-001 (homelab).
