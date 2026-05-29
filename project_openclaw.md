@@ -32,8 +32,11 @@ OpenClaw is Rob's self-hosted AI agent platform running on pve1 (OpenClaw-001, I
 - Security audit: 0 critical, 1 warn (Haiku fallback — acceptable)
 
 ## Access
-- Control UI: `http://192.168.5.64:18789` from LAN
-- Auth token in: `/home/grapesmc/.openclaw/identity/device-auth.json`
+- Control UI: `https://openclaw-001.amesbury.r23.ai` (Caddy reverse proxy, internal CA, LAN only)
+- Gateway token: `9a15986270f631a907c289c732a5c020c61d32b9926969dd` (from `openclaw.json` → `gateway.auth.token`)
+- Auth URL: `https://openclaw-001.amesbury.r23.ai/#token=9a15986270f631a907c289c732a5c020c61d32b9926969dd`
+- New devices need one-time approval: `openclaw devices approve <requestId>`
+- Caddy config: `/etc/caddy/Caddyfile`, service: `sudo systemctl reload caddy`
 
 ## Memory sync (set up 2026-05-29)
 - OpenClaw `MEMORY.md` → Claude Code: auto-synced via `memory-watcher.service` (inotifywait)
