@@ -44,21 +44,23 @@ OpenClaw is Rob's self-hosted AI agent platform running on pve1 (OpenClaw-001, I
 - Claude Code memory backed up to GitHub: `github.com/grapesmc/claude-code-memory` (auto-push on write)
 
 ## Homelab SSH Management
-openclaw-001 is the control plane for all homelab servers. SSH key: `~/.ssh/id_ed25519_homelab`
+openclaw-001 is the control plane for all homelab servers. SSH key: `~/.ssh/id_ed25519_homelab` (ed25519, no passphrase). SSH config at `~/.ssh/config`.
 
-| Host | IP | Port |
-|---|---|---|
-| hal9000 | 10.0.255.230 | 31392 |
-| lexx3000 | 10.0.255.235 | 31392 |
-| sydney | 10.0.255.238 | 31392 |
-| case | 10.0.255.253 | 31392 |
-| pi4-1 | 10.0.255.100 | 31392 |
-| debiandocker | 10.0.255.243 | 31392 |
-| homebridge | 10.0.255.229 | 31392 |
-| netdata-master | 10.0.255.195 | 31392 |
-| plex | 10.0.255.251 | 22 (no account yet) |
+| Host | IP | Port | User | Sudo | OS |
+|---|---|---|---|---|---|
+| hal9000 | 10.0.255.230 | 31392 | root | n/a | TrueNAS |
+| lexx3000 | 10.0.255.235 | 31392 | grapesmc | passwordless | Linux |
+| sydney | 10.0.255.238 | 31392 | grapesmc | passwordless | Linux |
+| case | 10.0.255.253 | 31392 | root | n/a | TrueNAS |
+| pi4-1 | 10.0.255.100 | 31392 | grapesmc | passwordless | Linux |
+| debiandocker | 10.0.255.243 | 31392 | grapesmc | passwordless | Linux |
+| homebridge | 10.0.255.229 | 31392 | grapesmc | passwordless | Linux |
+| netdata-master | 10.0.255.195 | 31392 | grapesmc | passwordless | Linux |
+| plex | 10.0.255.251 | 22 | root | n/a | Proxmox |
 
-All use `grapesmc`. SSH config at `~/.ssh/config`. Keys deployed and tested 2026-05-29.
+- TrueNAS/Proxmox hosts connect as root (key added via web UI) — no sudo needed
+- Linux hosts use grapesmc with passwordless sudo via `/etc/sudoers.d/grapesmc-nopasswd`
+- All verified working 2026-05-29
 
 ## Work bot
 OpenClaw was removed from the work bot — too much maintenance overhead. Only running on OpenClaw-001 (homelab).
