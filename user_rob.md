@@ -13,3 +13,4 @@ metadata:
 - **Style:** Runs his own homelab (Proxmox, Control4, UniFi), comfortable with infra, Node.js, networking
 - **Working style:** Prefers no-bullshit answers — wants verification before recommendations, not guesses
 - **Project:** Amesbury house (smart home), OpenClaw homelab agent, digital twin project with Courtney
+test
