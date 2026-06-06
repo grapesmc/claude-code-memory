@@ -4,4 +4,5 @@
 - [c4monitor (Amesbury Dashboard)](project_c4monitor.md) — home dashboard stack, open issues, AI chat details
 - [Rob — user profile](user_rob.md) — who Rob is, communication style, context
 - [Feedback: answer style](feedback_style.md) — Rob's hard rules for how to answer questions
+- [Feedback: diagnose before acting](feedback_diagnose_first.md) — always ask what's broken before touching live service config
 - [OpenClaw shared memory](openclaw_memory.md) — live synced from OpenClaw workspace MEMORY.md
