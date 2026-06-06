@@ -13,8 +13,8 @@ OpenClaw is Rob's self-hosted AI agent platform running on pve1 (OpenClaw-001, I
 
 **How to apply:** When touching OpenClaw config or upgrading, use this as reference.
 
-## Current state (as of 2026-05-29)
-- Version: 2026.5.27 (updated from 2026.5.22 on 2026-05-29)
+## Current state (as of 2026-06-06)
+- Version: 2026.6.1 (updated from 2026.5.27 on 2026-06-06)
 - Config: `/home/grapesmc/.openclaw/openclaw.json`
 - Primary model: `anthropic/claude-sonnet-4-6` (changed 2026-05-26, was Haiku)
 - Fallback model: `anthropic/claude-haiku-4-5-20251001`
